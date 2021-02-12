@@ -12,7 +12,8 @@
     "socketio",
     "javascript",
     "nodejs",
-    "mongodb"
+    "mongodb",
+    "heroku"
   ],
   "author": "Emmanuel Sogelola - 101203022",
   "license": "ISC",
