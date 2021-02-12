@@ -141,7 +141,7 @@ function addMessage(messageData) {
   if (visibility == false) document.dispatchEvent(eventNotificationAdd);
 }
 function getMessages() {
-  $.get(`http://localhost:3000/messages?room=${userData.room}`, (data) => {
+  $.get(`group-speak.herokuapp.com/messages?room=${userData.room}`, (data) => {
     data.forEach(addMessage);
     $(".chat")
       .stop()
@@ -154,7 +154,7 @@ function getMessages() {
   });
 }
 function sendMessage(messageData) {
-  $.post("http://localhost:3000/messages", messageData);
+  $.post("group-speak.herokuapp.com/messages", messageData);
   $(".chat")
     .stop()
     .animate(
