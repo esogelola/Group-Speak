@@ -1,0 +1,33 @@
+body {
+}
+.vertical-center {
+  min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 150px;
+}
+.logo-sm {
+  width: 100%;
+}
+
+.chat {
+  height: 300px;
+  overflow-y: auto;
+  background-color: aliceblue;
+}
+.chatMessageBox .row > * {
+  padding-left: 0 !important;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
