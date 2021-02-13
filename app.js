@@ -141,6 +141,7 @@ $(function () {
   $("#btnJoin").click((e) => {
     e.preventDefault();
     var data = $("form").serializeArray();
+    $("#messages").html("");
     joinRoom(data);
     $("#alertHome").hide();
   });
@@ -151,6 +152,7 @@ $(function () {
     $("#lblRoom").html(``);
     $("#lblMessage").html(`Message`);
     $("#alertHome").hide();
+    $("#messages").html("");
     socket.emit("leave", { username: userData.username, room: userData.room });
   });
   $("#btnSend").click((e) => {

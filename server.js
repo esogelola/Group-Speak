@@ -95,39 +95,41 @@ io.on("connect", (socket) => {
         data + " username is taken! Try some other username."
       );
     } else {
-      users.push({
-        socket_id: socket.id,
-        username: data.username,
-        room: data.room,
-      });
+      if (data.username != "") {
+        users.push({
+          socket_id: socket.id,
+          username: data.username,
+          room: data.room.trim(),
+        });
 
-      console.log(`${data.username} has joined #${data.room}`);
+        console.log(`${data.username} has joined #${data.room.trim()}`);
 
-      socket.emit("userValid", data);
+        socket.emit("userValid", data);
 
-      socket.join(data.room.toLowerCase());
-      socket.to(data.room.toLowerCase()).emit("userJoinedRoom", {
-        username: data.username,
-        room: data.room,
-      });
+        socket.join(data.room.toLowerCase().trim());
+        socket.to(data.room.toLowerCase().trim()).emit("userJoinedRoom", {
+          username: data.username,
+          room: data.room.trim(),
+        });
+      }
     }
   });
   socket.on("userIsTyping", (data) => {
-    socket.to(data.room.toLowerCase()).emit("userTyping", data);
+    socket.to(data.room.toLowerCase().trim()).emit("userTyping", data);
   });
   socket.on("userStoppedTyping", (data) => {
     if (data.username != "") {
-      socket.to(data.room.toLowerCase()).emit("stopTyping", data);
+      socket.to(data.room.toLowerCase().trim()).emit("stopTyping", data);
     }
   });
 
   socket.on("leave", (data) => {
-    socket.leave(data.room.toLowerCase());
     users = users.filter((user) => user.socket_id != socket.id);
     console.log(`${data.username} has left #${data.room}`);
-    socket.to(data.room.toLowerCase()).emit("userLeftRoom", {
+    socket.leave(data.room.toLowerCase().trim());
+    socket.to(data.room.toLowerCase().trim()).emit("userLeftRoom", {
       username: data.username,
-      room: data.room,
+      room: data.room.trim(),
     });
   });
 
