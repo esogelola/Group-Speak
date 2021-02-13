@@ -110,6 +110,9 @@ function joinRoom(data) {
     $("#chatScreen").show();
     $("#lblRoom").html(`#${userData.room}`);
     $("#lblMessage").html(`Message #${userData.room}`);
+    $("#userInfo").html(
+      `<small class="text-muted">username: <span class="text-primary">[${data[0].value}]</span></small>`
+    );
     getMessages();
 
     socket.on("userJoinedRoom", (data) => {
@@ -266,7 +269,7 @@ $(function () {
 });
 
 function formatDate(date) {
-  return new Date().toLocaleString(undefined, {
+  return date.toLocaleString(undefined, {
     day: "numeric",
     month: "numeric",
     year: "numeric",
