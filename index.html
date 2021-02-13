@@ -65,6 +65,11 @@
               <button class="btn btn-dark" id="btnJoin">JOIN</button>
             </div>
           </div>
+          <div
+            class="alert alert-danger mt-2"
+            id="alertHome"
+            role="alert"
+          ></div>
         </form>
       </div>
     </div>
@@ -86,11 +91,15 @@
         </div>
       </div>
       <div class="container border mx-auto mt-0 shadow p-3 mb-5 rounded chat">
-        <div id="messages"></div>
+        <div id="chatWindow">
+          <div id="messages"></div>
+          <div id="info"></div>
+        </div>
       </div>
 
       <div class="container mx-auto m-5 chatMessageBox">
         <small class="text-muted">All messages are stored in Database*</small>
+
         <form class="" action="/">
           <div class="row">
             <div class="col form-floating">

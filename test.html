@@ -31,5 +31,48 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div class="jumbotron" id="">
+      <div class="mx-auto text-center mt-3 row" style="width: 500px">
+        <div class="col-10"><h1 class="display-3">Group Speak</h1></div>
+        <div class="col-2">
+          <img src="./logo.png" class="logo-sm" alt="..." />
+        </div>
+        <hr />
+      </div>
+
+      <div class="container mx-auto mt-5 row">
+        <div class="col-11"><p class="lead" id="lblRoom">#Anime</p></div>
+        <div class="col-1">
+          <button class="btn btn-sm btn-outline-danger" id="btnDisconnect">
+            disconnect
+          </button>
+        </div>
+      </div>
+      <div class="container border mx-auto mt-0 shadow p-3 mb-5 rounded chat">
+        <div id="messages"></div>
+      </div>
+
+      <div class="container mx-auto m-5 chatMessageBox">
+        <small class="text-muted">All messages are stored in Database*</small>
+        <form class="" action="/">
+          <div class="row">
+            <div class="col form-floating">
+              <textarea
+                class="form-control shadow"
+                placeholder="Leave a comment here"
+                id="messageArea"
+              ></textarea>
+              <label for="messageArea" class="text-muted" id="lblMessage"
+                >Message</label
+              >
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-outline-dark" id="btnSend">SEND</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const { emit } = require("process");
 dotenv.config();
 const DB_URL = `mongodb+srv://ameroft:${process.env.DB_PASSWORD}@cluster0.dcuv4.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 var app = express();
@@ -22,7 +23,7 @@ var rooms = [
   "Hobbies",
   "News",
   "Covid19",
-  "nodeJS",
+  "NodeJS",
 ];
 var users = [];
 
@@ -99,16 +100,35 @@ io.on("connect", (socket) => {
         username: data.username,
         room: data.room,
       });
+
       console.log(`${data.username} has joined #${data.room}`);
+
       socket.emit("userValid", data);
 
       socket.join(data.room.toLowerCase());
+      socket.to(data.room.toLowerCase()).emit("userJoinedRoom", {
+        username: data.username,
+        room: data.room,
+      });
     }
   });
+  socket.on("userIsTyping", (data) => {
+    socket.to(data.room.toLowerCase()).emit("userTyping", data);
+  });
+  socket.on("userStoppedTyping", (data) => {
+    if (data.username != "") {
+      socket.to(data.room.toLowerCase()).emit("stopTyping", data);
+    }
+  });
+
   socket.on("leave", (data) => {
     socket.leave(data.room.toLowerCase());
     users = users.filter((user) => user.socket_id != socket.id);
     console.log(`${data.username} has left #${data.room}`);
+    socket.to(data.room.toLowerCase()).emit("userLeftRoom", {
+      username: data.username,
+      room: data.room,
+    });
   });
 
   socket.on("disconnect", function (data) {

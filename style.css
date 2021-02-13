@@ -18,6 +18,7 @@ body {
 .chat {
   height: 300px;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: aliceblue;
 }
 .chatMessageBox .row > * {
@@ -30,4 +31,9 @@ body {
 
 .left {
   float: left;
+}
+
+.message {
+  width: 50%;
+  float: right;
 }
